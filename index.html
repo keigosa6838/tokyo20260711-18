@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>東京七日 · 2026 夏 | 隨身助理</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans antialiased selection:bg-amber-500 selection:text-slate-900">
+
+    <div class="max-w-md mx-auto bg-slate-900 min-h-screen shadow-2xl border-x border-slate-800 flex flex-col pb-24">
+        
+        <header class="sticky top-0 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 p-5 z-50">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-xl font-bold tracking-wider text-amber-400">TOKYO SUMMER</h1>
+                    <p class="text-xs text-slate-400 mt-0.5">2026.07.11 - 07.18 · 7泊8日</p>
+                </div>
+                <div class="bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                    <i data-lucide="hotel" class="w-4 h-4 text-amber-400"></i>
+                    <span class="text-xs font-semibold text-amber-300">文華東方</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-1 p-4 space-y-6">
+
+            <section class="bg-gradient-to-br from-amber-500/10 to-orange-500/5 border border-amber-500/20 rounded-2xl p-4">
+                <div class="flex items-start gap-3">
+                    <div class="p-2 bg-amber-500/20 rounded-xl text-amber-400 shrink-0">
+                        <i data-lucide="bell" class="w-5 h-5"></i>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-sm font-semibold text-amber-300">今日焦點提醒</h3>
+                        <p id="dynamic-alert" class="text-xs text-slate-300 leading-relaxed">
+                            請點選下方日期查看當日關鍵行程與餐廳預約。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="space-y-2">
+                <div class="flex justify-between items-center px-1">
+                    <span class="text-xs font-bold uppercase tracking-widest text-slate-400">行程日程表</span>
+                    <span class="text-xs text-amber-400" id="selected-date-lbl">D1 07/11 (六)</span>
+                </div>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar py-2 -mx-4 px-4">
+                    <div id="day-tabs" class="flex gap-2"></div>
+                </div>
+            </section>
+
+            <section id="focus-card" class="hidden bg-slate-800/50 border border-slate-700/50 rounded-2xl p-4 space-y-3">
+                </section>
+
+            <section class="space-y-3">
+                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 px-1">今日時間軸/景點</h3>
+                <div id="timeline-content" class="bg-slate-800/30 border border-slate-800 rounded-2xl p-4 space-y-4">
+                    </div>
+            </section>
+
+            <section class="grid grid-cols-2 gap-3">
+                <div class="bg-slate-800/40 border border-slate-800 p-3.5 rounded-xl flex items-center gap-3">
+                    <div class="p-2 bg-blue-500/10 text-blue-400 rounded-lg">
+                        <i data-lucide="train" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-semibold">JR Pass 3日</h4>
+                        <p class="text-[10px] text-slate-400">D4-D6 涵蓋高划算</p>
+                    </div>
+                </div>
+                <div class="bg-slate-800/40 border border-slate-800 p-3.5 rounded-xl flex items-center gap-3">
+                    <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg">
+                        <i data-lucide="cloud-sun" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-semibold">夏季氣溫</h4>
+                        <p class="text-[10px] text-slate-400">東京 33-35°C 意防曬</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-slate-900/90 backdrop-blur-lg border-t border-slate-800 px-6 py-3 flex justify-around items-center z-50">
+            <button class="flex flex-col items-center gap-1 text-amber-400">
+                <i data-lucide="calendar-days" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">每日行程</span>
+            </button>
+            <button onclick="alert('【交通總覽】\n所有新幹線行程（金澤、輕井澤、越後湯沢）均以東京為起終點，每晚回文華東方住宿，享受極致尊榮。')" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-200 transition">
+                <i data-lucide="map" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">交通路線</span>
+            </button>
+            <button onclick="alert('【預約清單狀態】\n1. 東麻布 いち川 (D1) - 已確認 ✓\n2. Peter Luger (D2) - 已確認 ✓\n3. Shu*Kura 清酒列車 (D6) - 需出發前2週預約\n4. 金澤21世紀美術館泳池 (D4) - 須官網預約')" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-200 transition">
+                <i data-lucide="ticket" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">票券預約</span>
+            </button>
+        </nav>
+    </div>
+
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+
+    <script>
+        // 將手冊數據結構化
+        const itineraryData = {
+            1: {
+                day: "D1", date: "07/11", week: "六", title: "東京到着 · 頂級割烹晚宴",
+                alert: "BR198 落地後請直奔飯店 Check-in，預留 1.5 hr 以上才趕得上 18:30 的 いち川 晚宴。建議搭乘利木津巴士（約75分）。",
+                focus: {
+                    type: "restaurant", title: "東麻布 いち川", time: "18:30",
+                    details: "季節の厳選食材コース ¥25,000/人 (3名/檯前/預約號: 494MPRVY44)。高級會席建議著正式服裝。"
+                },
+                timeline: [
+                    { time: "午 前", content: "BR 198 長榮航空 (TPE → NRT) 出發" },
+                    { time: "下 午", content: "抵達後搭乘利木津巴士至日本橋文華東方酒店辦理入住、短暫休憩調整時差" },
+                    { time: "18:30", content: "前往東麻布 いち川 享用頂級晚宴" }
+                ]
+            },
+            2: {
+                day: "D2", date: "07/12", week: "日", title: "東京都心 · 精品購物與經典牛排",
+                alert: "剛到第一天時差與疲勞尚未完全調整，安排市區輕鬆逛街為最佳緩衝，以完美狀態享受晚宴。",
+                focus: {
+                    type: "restaurant", title: "Peter Luger Steakhouse 東京", time: "18:30",
+                    details: "代表者: ていせいけつ樣 (大人3名/無過敏)。經典紐約風格本格熟成牛排，建議商務休閒著裝。"
+                },
+                timeline: [
+                    { time: "早 晨", content: "享用文華東方精緻早餐" },
+                    { time: "白 天", content: "日本橋、三越、COREDO室町散步，隨後前往銀座、表參道精品自由購物" },
+                    { time: "下 午", content: "輕鬆咖啡午後，精緻下午茶與放鬆" },
+                    { time: "18:30", content: "Peter Luger 赤坂店 頂級熟成牛排晚宴" }
+                ]
+            },
+            3: {
+                day: "D3", date: "07/13", week: "一", title: "彈性備選日 · 自由探索",
+                alert: "本日為全彈性設計，可於出發前 1-2 天視當時的體力與天氣，自由四選一彈性調整行程。",
+                focus: {
+                    type: "info", title: "四種備選方案彈性擇一", time: "全天彈性",
+                    details: "1. 妙高高原(景色最壯觀/新幹線2hr) 2. 日光東照宮(文化深厚/特急1.5hr) 3. 鎌倉大佛(海景輕鬆/JR1hr) 4. 東京市區(上野/淺草/晴空塔)"
+                },
+                timeline: [
+                    { time: "彈 性", content: "方案 A: 妙高高原（龍窪名水 + SORA terrace，山區建議早班車避免午後起霧）" },
+                    { time: "彈 性", content: "方案 B: 日光文化之旅（東照宮 + 華嚴瀑布）" },
+                    { time: "彈 性", content: "方案 C: 鎌倉近郊極簡風（大佛 + 江之電海景，最輕鬆）" },
+                    { time: "彈 性", content: "方案 D: 東京自由日（上野、淺草、晴空塔購物探索）" }
+                ]
+            },
+            4: {
+                day: "D4", date: "07/14", week: "二", title: "金澤一日遊 · 加賀百萬石古都",
+                alert: "東京至金澤單程約 2.5 小時，來回車程 5 小時。金澤巴士一日券僅需 ¥500，市區景點非常集中。",
+                focus: {
+                    type: "warning", title: "景點特別提醒", time: "日間",
+                    details: "金澤 21 世紀美術館的「兼六園/游泳池裝置藝術」非常熱門，內部特定區域務必提早於官網預約。"
+                },
+                timeline: [
+                    { time: "08:00+", content: "搭乘北陸新幹線（かがやき號）前往金澤" },
+                    { time: "中 午", content: "近江町市場品嚐新鮮海鮮早市（甘蝦、螃蟹、もりもり迴轉壽司）" },
+                    { time: "下 午", content: "漫步東茶屋街江戶木造建築、享用金箔冰淇淋 ➔ 兼六園日本三大名園賞燈籠 ➔ 21世紀美術館" },
+                    { time: "晚 間", content: "搭乘新幹線返回東京文華東方，晚餐東京自選" }
+                ]
+            },
+            5: {
+                day: "D5", date: "07/15", week: "三", title: "輕井澤渡假 · 湖畔花園與河豚宴",
+                alert: "輕井澤單程僅需 70 分鐘，今日主打避暑渡假感。晚間回東京銀座享用頂級河豚全餐。",
+                focus: {
+                    type: "restaurant", title: "東京銀座 · 河豚全餐晚宴", time: "晚間",
+                    details: "避暑行程結束後返回東京，河豚餐廳名店通常一位難求，建議提前一週完成訂位。"
+                },
+                timeline: [
+                    { time: "上 午", content: "搭乘北陸新幹線（あさま號）快速直達輕井澤" },
+                    { time: "中 午", content: "漫步舊銀座通り、探索精緻工藝與精品咖啡廳散步" },
+                    { time: "下 午", content: "前往輕井澤 LAKE GARDEN 湖畔花園欣賞夏季玫瑰，並參觀千住博美術館開放性建築藝術" },
+                    { time: "18:30+", content: "搭新幹線返京，前往銀座享用精緻河豚料理晚宴" }
+                ]
+            },
+            6: {
+                day: "D6", date: "07/16", week: "四", title: "越後湯沢 · 清酒列車與大地藝術節",
+                alert: "清酒列車 Shu*Kura 非常特殊且熱門，務必於出發前 2 週完成預約，體驗車上品酒與稻田美景。",
+                focus: {
+                    type: "restaurant", title: "十日町當地 妻有豬肉料理", time: "13:00",
+                    details: "享用越後妻有當地名物——高品質的妻有豬肉料理與新潟越後極致米食。"
+                },
+                timeline: [
+                    { time: "上 午", content: "搭乘上越新幹線（約75分）前往越後湯沢與十日町" },
+                    { time: "白 天", content: "參觀越後妻有大地藝術節（戶外棚田景觀、草間彌生《花咲ける妻有》作品群）" },
+                    { time: "下 午", content: "體驗觀光限定 Shu*Kura 清酒列車，沿途欣賞無邊際稻田平原並品鑑地酒" },
+                    { time: "晚 間", content: "搭乘新幹線輕鬆返回東京文華東方酒店" }
+                ]
+            },
+            7: {
+                day: "07/17", date: "07/17", week: "五", title: "東京都心 · 最終自由購物日",
+                alert: "明天一早就要 Check-out，今晚請盡情享受東京最後的高奢夜晚。貼心提醒：Suica 卡餘額記得清零。",
+                focus: {
+                    type: "info", title: "最終完美購物與漫步", time: "全天",
+                    details: "自由串聯東京最具代表性的文化與血拼地標，晚餐建議自選一家米其林或精緻割烹料理。"
+                },
+                timeline: [
+                    { time: "早 晨", content: "文華東方悠閒早餐，步行至日本橋三越、COREDO做最終伴手禮採買" },
+                    { time: "中 午", content: "前往築地場外市場享用最新鮮的海鮮丼午餐" },
+                    { time: "下 午", content: "造訪濱離宮恩賜庭園欣賞夏季花菖蒲，或前往上野參觀東京國立博物館" },
+                    { time: "晚 間", content: "淺草、晴空塔絕美夜景，搭配自選精緻奢華晚餐，回飯店整理行李" }
+                ]
+            },
+            8: {
+                day: "D8", date: "07/18", week: "六", title: "東京 出發 · 珍重再見",
+                alert: "長榮航空 BR197 返台。請務必提前 3 小時抵達機場。利木津巴士直接從文華東方大廳出發，極其便利。",
+                focus: {
+                    type: "flight", title: "長榮航空 BR 197 (NRT → TPE)", time: "午後",
+                    details: "文華東方大廳直達機場巴士約 75 分鐘。若時間充裕，出發前可在日本橋三越做最後補貨。"
+                },
+                timeline: [
+                    { time: "早 晨", content: "在飯店享受最後一次尊榮早餐，優雅辦理 Check-out" },
+                    { time: "10:00", content: "若時間充裕，於日本橋三越進行最後一輪伴手禮與精緻小物採買" },
+                    { time: "中 午", content: "自文華東方大廳搭乘利木津巴士直達成田機場，辦理出境，搭機返台" }
+                ]
+            }
+        };
+
+        let currentDay = 1;
+
+        // 初始化渲染
+        function initApp() {
+            renderTabs();
+            switchDay(1);
+            lucide.createIcons(); // 初始化圖標
+        }
+
+        // 渲染橫向滑動 Tabs
+        function renderTabs() {
+            const container = document.getElementById('day-tabs');
+            container.innerHTML = '';
+            
+            Object.keys(itineraryData).forEach(d => {
+                const item = itineraryData[d];
+                const activeClass = "bg-amber-400 text-slate-900 font-bold shadow-lg shadow-amber-400/20";
+                const inactiveClass = "bg-slate-800 text-slate-400 hover:bg-slate-700/80 border border-slate-700/30";
+                
+                const btn = document.createElement('button');
+                btn.id = `tab-btn-${d}`;
+                btn.className = `flex flex-col items-center justify-center px-4 py-2.5 rounded-xl text-xs tracking-wider transition-all duration-200 shrink-0 min-w-[70px] ${inactiveClass}`;
+                btn.onclick = () => switchDay(parseInt(d));
+                btn.innerHTML = `
+                    <span class="text-[10px] opacity-70 font-semibold">${item.day}</span>
+                    <span class="text-sm font-bold mt-0.5">${item.date.split('/')[1]}</span>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        // 切換日期邏輯
+        function switchDay(dayId) {
+            // 更新 Tab 高亮狀態
+            Object.keys(itineraryData).forEach(d => {
+                const btn = document.getElementById(`tab-btn-${d}`);
+                if(parseInt(d) === dayId) {
+                    btn.className = btn.className.replace(/bg-slate-800 text-slate-400.*border-slate-700\/30/, 'bg-amber-400 text-slate-900 font-bold shadow-lg shadow-amber-400/20');
+                } else {
+                    btn.className = btn.className.replace(/bg-amber-400 text-slate-900 font-bold shadow-lg shadow-amber-400\/20/, 'bg-slate-800 text-slate-400 hover:bg-slate-700/80 border border-slate-700/30');
+                }
+            });
+
+            const data = itineraryData[dayId];
+            
+            // 更新頂部標籤與警告橫幅
+            document.getElementById('selected-date-lbl').innerText = `${data.day} ${data.date} (${data.week})`;
+            document.getElementById('dynamic-alert').innerText = data.alert;
+
+            // 更新當日焦點卡片
+            const focusCard = document.getElementById('focus-card');
+            if (data.focus) {
+                focusCard.classList.remove('hidden');
+                let icon = "utensils";
+                let badgeColor = "bg-amber-500/20 text-amber-300 border-amber-500/30";
+                if(data.focus.type === 'flight') { icon = "plane-takeoff"; badgeColor = "bg-blue-500/20 text-blue-300 border-blue-500/30"; }
+                if(data.focus.type === 'warning') { icon = "alert-triangle"; badgeColor = "bg-rose-500/20 text-rose-300 border-rose-500/30"; }
+                if(data.focus.type === 'info') { icon = "compass"; badgeColor = "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"; }
+
+                focusCard.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${badgeColor} flex items-center gap-1">
+                            <i data-lucide="${icon}" class="w-3 h-3"></i> 當日焦點
+                        </span>
+                        <span class="text-xs text-slate-400 font-medium">${data.focus.time}</span>
+                    </div>
+                    <h4 class="text-base font-bold text-slate-100">${data.focus.title}</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed bg-slate-900/40 p-2.5 rounded-lg border border-slate-700/30">${data.focus.details}</p>
+                `;
+            } else {
+                focusCard.classList.add('hidden');
+            }
+
+            // 更新當日時間軸
+            const timelineContainer = document.getElementById('timeline-content');
+            timelineContainer.innerHTML = '';
+            data.timeline.forEach(item => {
+                const row = document.createElement('div');
+                row.className = "flex gap-4 items-start group";
+                row.innerHTML = `
+                    <div class="text-xs font-bold text-amber-400 w-14 shrink-0 pt-0.5 tracking-tight">${item.time}</div>
+                    <div class="relative pl-4 border-l border-slate-700 group-last:border-transparent pb-1">
+                        <div class="absolute -left-[4.5px] top-2 w-2 h-2 rounded-full bg-slate-600 group-hover:bg-amber-400 transition-colors"></div>
+                        <p class="text-xs text-slate-200 leading-relaxed">${item.content}</p>
+                    </div>
+                `;
+                timelineContainer.appendChild(row);
+            });
+
+            // 重新渲染新插入元件的圖標
+            lucide.createIcons();
+        }
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>
